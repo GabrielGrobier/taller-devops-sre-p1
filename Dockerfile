@@ -1,4 +1,9 @@
+# Imagen base multi-arch (linux/amd64 y linux/arm64): Docker elige la variante según la plataforma de destino.
 FROM python:3.12-slim
+
+# Las rellena buildx automáticamente (p. ej. linux/arm64).
+ARG TARGETPLATFORM
+LABEL org.opencontainers.image.platform="${TARGETPLATFORM}"
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
