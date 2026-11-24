@@ -8,9 +8,23 @@ permissions:
   contents: read
 
 jobs:
+  seguridad:
+    runs-on: ubuntu-latest
+    steps:
+      - name: escanear vulnerabilidades
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-path: '.'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+
+
   deploy:
     runs-on: ubuntu-latest
-
+    #artefactos entre jobs 
     steps:
       - name: obtener el codigo 
         uses: actions/checkout@v7
